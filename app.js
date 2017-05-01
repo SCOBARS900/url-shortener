@@ -8,15 +8,16 @@ var app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+app.use(express.static(__dirname + '/public'));
 
 
-app.set('port', (process.env.PORT || 3000));
 
 
 app.get('/new/:urlToShorten(*)', (req, res)=> {
      
-  var urlToShorten = req.params.urlToShorten;
-  console.log(urlToShorten);
+  var { urlToShorten } = req.params;
+    
+  return res.json({urlToShorten});
 
 });
 
@@ -27,7 +28,7 @@ app.get('/new/:urlToShorten(*)', (req, res)=> {
 
 
 
-
+app.set('port', (process.env.PORT || 3000));
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));

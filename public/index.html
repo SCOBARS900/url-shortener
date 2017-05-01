@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en" ng-app="shortUrlApp">
+    <head>
+        <title>URL Shortener</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
+        <script src="js/app.js"></script>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="header">
+                URL Shortener Microservice
+            </h1>
+            <h2>Free Code Camp</h2>
+            
+            
+            <section ng-controller="shortAppCtrl">
+            
+            <input placeholder="Insert URL" ng-model="urlToShorten">
+            <a class="btn btn-success" ng-href='/new/{{urlToShorten}}'>Go</a>    
+            </section>       
+        </div>
+    </body>
+</html>
