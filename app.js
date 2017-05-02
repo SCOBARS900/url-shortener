@@ -9,8 +9,20 @@ var app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/shortUrls');
 
+if(process.env.MONGODB_URI) {
+ mongoose.connect(process.env.MONGODB_URI);
+
+}else {
+ var db = 'mongodb://localhost/shortUrls';
+ mongoose.connect(db, function(err){ //db = 'mongodb://localhost/yourdb'
+  if(err){
+   console.log(err);
+  }else {
+   console.log('mongoose connection is successful on: ' + db);
+  }
+ });
+}
 
 
 app.use(express.static(__dirname + '/public'));
