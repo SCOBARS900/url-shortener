@@ -10,7 +10,7 @@ var app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-var db = 'mongodb://scobars900:hund050890@ds129281.mlab.com:29281/shorturl';
+var db = process.env.MONGOLAB_URI;
 
 mongoose.connect(db, function(err){
   if(err){
@@ -21,7 +21,6 @@ mongoose.connect(db, function(err){
  });
 
 
- 
  
 
 

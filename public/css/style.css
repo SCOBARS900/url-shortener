@@ -2,6 +2,7 @@ body {
     text-align: center;
     font-family: monospace;
     background-image: url(../img/bk1.jpg);
+    color: white;
 }
 
 
@@ -10,8 +11,9 @@ h1 {
     color: white;
 }
 
-ul {
-    font-size: 20px;
+
+h2 {
+    color: orange;
 }
 
 h3 {
@@ -19,7 +21,30 @@ h3 {
 }
 
 
+h4 {
+    font-size: 20px;
+}
+
+p {
+    font-size: 16px;
+}
 
 
+#userStories p {
+    font-size: 22px;
+}
 
+input {
+    border-radius: 40px;
+    width: 300px;
+    padding-left: 20px;
+    color: black;
+    padding-top: 4px;
+}
+
+.btn {
+    border-radius: 10px;
+    background-color: darkred;
+    border-color: darkred;
+}
 
