@@ -10,20 +10,19 @@ var app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+var db = 'mongodb://scobars900:#hund050890@ds129281.mlab.com:29281/shorturl';
 
-if(process.env.MONGODB_URI) {
- mongoose.connect(process.env.MONGOLAB_URI);
-
-}else {
- var db = 'mongodb://localhost:27017/shortUrls';
- mongoose.connect(db, function(err){
+mongoose.connect(db, function(err){
   if(err){
    console.log(err);
   }else {
    console.log('mongoose connection is successful on: ' + db);
   }
  });
-}
+
+
+ 
+ 
 
 
 app.use(express.static(__dirname + '/public'));
