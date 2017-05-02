@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var mongoose = require('mongoose');
+
 var shortUrl = require('./models/shortUrl')
 var app = express();
 
@@ -14,8 +15,8 @@ if(process.env.MONGODB_URI) {
  mongoose.connect(process.env.MONGODB_URI);
 
 }else {
- var db = 'mongodb://localhost/shortUrls';
- mongoose.connect(db, function(err){ //db = 'mongodb://localhost/yourdb'
+ var db = 'mongodb://localhost:27017/shortUrls';
+ mongoose.connect(db, function(err){
   if(err){
    console.log(err);
   }else {
