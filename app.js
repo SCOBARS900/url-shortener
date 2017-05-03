@@ -2,27 +2,42 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var mongoose = require('mongoose');
+var mongo = require('mongodb');
 
-var shortUrl = require('./models/shortUrl')
+
 var app = express();
+
 
 
 app.use(bodyParser.json());
 app.use(cors());
 
-var db = process.env.MONGOLAB_URI;
+var Schema = mongoose.Schema;
 
-mongoose.connect(db, function(err){
+var urlSchema = new Schema({
+   originalUrl : String,
+   shorterUrl : String
+    
+}, {timestamps: true});
+
+var modelClass = mongoose.model('shortUrlSchema', urlSchema);
+
+
+
+
+
+var linkToConnection = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/shortUrls';
+
+mongoose.connect(linkToConnection, function(err){
   if(err){
    console.log(err);
   }else {
-   console.log('mongoose connection is successful on: ' + db);
+   console.log('mongoose connection is successful');
   }
  });
 
 
  
-
 
 app.use(express.static(__dirname + '/public'));
 
@@ -41,7 +56,7 @@ app.get('/new/:urlToShorten(*)', (req, res)=> {
   if(urlToShorten.match(regex)) {
       var short = Math.floor(Math.random()*10000).toString();
       
-      var data = new shortUrl(
+      var data = new modelClass(
         {
             originalUrl: urlToShorten,
             shorterUrl: short
@@ -57,7 +72,7 @@ app.get('/new/:urlToShorten(*)', (req, res)=> {
       
       
   } else {
-      var data = new shortUrl(
+      var data = new modelClass(
         {
            originalUrl: urlToShorten,
            shorterUrl: 'Invalid Url'
@@ -76,25 +91,31 @@ app.get('/new/:urlToShorten(*)', (req, res)=> {
 });
 
 
-app.get('/:urlToForward', (req, res)=> {
-   var shorterUrl = req.params.urlToForward;
+app.get('/:urlNumber', (req, res)=> {
    
-   shortUrl.findOne({'shorterUrl': shorterUrl}, (err, data)=>{
-      if(err) {
-          return res.send('Error reading database');
-      } else {
-          var re = new RegExp("^(http|https)://", "i");
-          var strToCheck = data.originalUrl;
-          if(re.test(strToCheck)){
-              res.redirect(301, data.originalUrl);
-          } else {
-              res.redirect(301, 'http://' + data.originalUrl);
-          }
-      }
-       
-   });
+   var numberUrl = req.params.urlNumber;
     
+    modelClass.findOne({ 'shorterUrl': numberUrl}, function(err, doc) {
+       if(err){
+           return res.send('Error');
+       } else {
+           var rg = new RegExp("^(http|https)://", "i");
+           var webLink = doc.originalUrl;
+           if(rg.test(webLink)) {
+               res.redirect(301, doc.originalUrl);
+           } else {
+               res.redirect(301, 'http://' + doc.originalUrl);
+           }
+           
+       }
+         
+        
+    });
+   
+
 });
+
+
 
 
 
