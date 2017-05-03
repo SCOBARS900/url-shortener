@@ -24,7 +24,7 @@
             
             <h3>Example creation usage:</h3>
             <h4>Simply insert a url into input field and press button Go</h4>
-            <p>Example: www.google.com</p>
+            <p>Example: www.youtube.com</p>
             
             <section ng-controller="shortAppCtrl">
             <input placeholder="Insert URL" ng-model="urlToShorten">
@@ -32,19 +32,19 @@
             </section>
             <br>
             
-            <h4>Add new/website to the browser will work too</h4>
-            <p>Example: https://url-shortener-scobars.herokuapp.com/new/www.google.com</p>
+            <h4>Or add "new/website" to the browser will work too</h4>
+            <p>Example: https://url-shortener-scobars.herokuapp.com/new/www.youtube.com</p>
             <h3>Example creation output</h3>
             <p>
-             {
-                "original_url":"http://www.google.com",
-                "short_url":"6715"
-             }
+                {
+                 "originalUrl":"www.youtube.com","shorterUrl":"3706","_id":"590a46533c6b9b0004206e77"
+                
+                }
             </p>
             <h3>Usage:</h3>
-            <p>https://url-shortener-scobars.herokuapp.com/6715</p>
+            <p>https://url-shortener-scobars.herokuapp.com/3706</p>
             <h3>Will redirect to:</h3>
-            <p>https://www.google.com/</p>
+            <p>https://www.youtube.com</p>
         
             
         </div>
